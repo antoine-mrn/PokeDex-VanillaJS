@@ -223,7 +223,7 @@ function searchPokemon() {
         infoMessage.textContent = ""
     }
     else {
-        infoMessage.textContent = "No pokemon found, you have to explore the world to find him"
+        infoMessage.textContent = "No pokemon found, you have to explore the world to find it"
     }
 }
 
