@@ -40,7 +40,7 @@ async function fetchPokemon() {
         const responses = await Promise.all(fetches)
         for (const response of responses) {
             if(!response.ok) {
-                throw new Error(`Pokemon not found: ${response.status}`)
+                throw new Error(`${response.status} Pokemon not found`)
             }
             const currentPokemon = await response.json()
             creatingPokemon(currentPokemon)
@@ -50,8 +50,9 @@ async function fetchPokemon() {
         loader.classList.add('hide')
         intersectionObserver.observe(document.querySelector('.intersection-observer'))
     }
-    catch {
-        console.error(error)
+    catch (error) {
+        infoMessage.textContent = `${error}`
+        loader.classList.add('hide')
     }
 }
 
