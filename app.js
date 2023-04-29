@@ -155,10 +155,20 @@ function addTypeFilterOption() {
 
 // Initialisation filtrage
 
-function FilterInit() {
+const form = [...document.querySelector("form")]
+
+function filterInit() {
     cardContainer.innerHTML = ""
     intersectionObserver.unobserve(document.querySelector('.intersection-observer'))
-    searchInput.value = ""
+
+    form.forEach(el => {
+        if(!el.classList.contains("active") && el.type != "reset") {
+            el.value = ""
+        }
+        else {
+            el.classList.remove("active")
+        }
+    })
 }
 
 // Filtre par génération
@@ -166,7 +176,8 @@ function FilterInit() {
 filterGeneration.addEventListener('input', showOneGeneration)
 
 function showOneGeneration() {
-    FilterInit()
+    filterGeneration.classList.add("active")
+    filterInit()
     if(filterGeneration.value > 0) {
         const currentGeneration = filterGeneration.value
         const generationFiltered = pokemonTab.slice(pokemonGeneration[currentGeneration][0] - 1, pokemonGeneration[currentGeneration][1])
@@ -183,7 +194,8 @@ function showOneGeneration() {
 filterType.addEventListener('input', showOneType)
 
 function showOneType() {
-    FilterInit()
+    filterType.classList.add("active")
+    filterInit()
     if(filterType.value != "") {
         const currentType = filterType.value
         const typeFiltered = pokemonTab.filter(el => el.types.includes(currentType))
@@ -200,7 +212,8 @@ const searchInput = document.getElementById('research')
 searchInput.addEventListener('input', searchPokemon)
 
 function searchPokemon() {
-    FilterInit()
+    searchInput.classList.add("active")
+    filterInit()
 
     const searchInputValue = searchInput.value.toLowerCase()
     const filteredTab = pokemonTab.filter(el => el.name.toLowerCase().includes(searchInputValue))
