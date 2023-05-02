@@ -168,6 +168,10 @@ input[type="search"] {
   font-size: 1.1em;
 }
 
+.pokemon-name {
+  text-transform: capitalize;
+}
+
 .pokemon-image {
   width: 150px;
 }
