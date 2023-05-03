@@ -7,6 +7,8 @@
   font-style: normal;
 }
 
+/* Reset CSS */
+
 *,
 ::before,
 ::after {
@@ -18,6 +20,8 @@
 body {
   background-color: #ebebeb;
 }
+
+/* Loader  */
 
 .loader {
   z-index: 10;
@@ -61,20 +65,22 @@ body {
   }
 }
 
+/* Nav */
+
 nav .pokedex-logo {
   padding: 25px 0 0 25px;
-  width: 350px;
+  width: 300px;
 }
 
+/* Container global pour le main */
+
 .container {
-  max-width: 1920px;
+  max-width: 1800px;
   margin: 0 auto;
   padding: 15px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   gap: 15px;
-  flex-wrap: wrap;
 }
 
 /* Form style */
@@ -86,6 +92,7 @@ form {
   align-items: flex-end;
   gap: 20px;
   margin-bottom: 20px;
+  font-size: 0.8em;
 }
 
 .input-group {
@@ -105,6 +112,7 @@ select {
 
 input,
 select {
+  width: 200px;
   padding: 5px;
   height: 30px;
   border-radius: 5px;
@@ -113,13 +121,13 @@ select {
 }
 
 input[type="reset"] {
-  width: 150px;
+  /* width: 150px; */
   background: #ffffff;
   font-family: "game-font", Arial, Helvetica, sans-serif;
 }
 
 input[type="search"] {
-  width: 200px;
+  /* width: 200px; */
   padding: 10px;
   cursor: auto;
   font-family: "game-font", Arial, Helvetica, sans-serif;
@@ -136,7 +144,7 @@ input[type="search"] {
 .card-container {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
