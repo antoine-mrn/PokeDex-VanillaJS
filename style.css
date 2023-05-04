@@ -76,11 +76,11 @@ nav .pokedex-logo {
 
 .container {
   max-width: 1800px;
-  margin: 0 auto;
+  margin: 15px auto;
   padding: 15px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 25px;
 }
 
 /* Form style */
@@ -91,52 +91,42 @@ form {
   flex-wrap: wrap;
   align-items: flex-end;
   gap: 20px;
-  margin-bottom: 20px;
-  font-size: 0.8em;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
 }
 
 form label {
+  display: block;
   text-align: center;
-  margin: 5px 0;
-}
-
-.input-group,
-select {
+  margin: 10px 0;
   font-family: "game-font", Arial, Helvetica, sans-serif;
+  font-size: 0.8em;
 }
 
 input,
 select {
+  font-family: "game-font", Arial, Helvetica, sans-serif;
   width: 200px;
   padding: 5px;
   height: 30px;
   border-radius: 5px;
   border: 1px solid black;
   cursor: pointer;
+  font-size: 0.7em;
 }
 
 input[type="reset"] {
-  /* width: 150px; */
   background: #ffffff;
-  font-family: "game-font", Arial, Helvetica, sans-serif;
 }
 
 input[type="search"] {
-  /* width: 200px; */
   padding: 10px;
   cursor: auto;
-  font-family: "game-font", Arial, Helvetica, sans-serif;
 }
 
 .info-message {
   text-align: center;
   font-family: "Pathway Extreme", sans-serif;
   font-size: 1.2em;
+  font-weight: 500;
 }
 
 /* Card style */
@@ -151,12 +141,8 @@ input[type="search"] {
 .pokemon-card {
   font-family: "Pathway Extreme", sans-serif;
   box-shadow: 1px 1px 4px 0px #000000;
-  /* height: 300px; */
   width: 200px;
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   cursor: pointer;
   transition: all 0.1s ease-out;
 }
@@ -169,18 +155,21 @@ input[type="search"] {
 .pokemon-identification {
   width: 100%;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-weight: 600;
   font-size: 1.1em;
+}
+
+.pokemon-id {
+  font-weight: 300;
 }
 
 .pokemon-name {
   text-transform: capitalize;
+  font-weight: 500;
 }
 
 .pokemon-image {
+  display: block;
+  margin: 0 auto;
   width: 150px;
 }
 
@@ -207,7 +196,7 @@ input[type="search"] {
     display: block;
     margin: 0 auto;
     padding: 25px 0 0 0;
-    width: 80%;
+    width: 80vw;
   }
 
   .loader-image {
