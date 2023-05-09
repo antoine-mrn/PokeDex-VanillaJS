@@ -42,7 +42,6 @@ body {
 
 .loader-image {
   width: 100px;
-  height: 100px;
 }
 
 .loader-image:nth-child(1),
@@ -174,7 +173,6 @@ input[type="search"] {
 }
 
 .pokemon-type-container {
-  width: 100%;
   padding: 20px 10px;
   display: flex;
   justify-content: center;
@@ -201,7 +199,6 @@ input[type="search"] {
 
   .loader-image {
     width: 60px;
-    height: 60px;
   }
 }
 

@@ -24,10 +24,10 @@ const allTypes = {
     shadow: "#382e26"
 }
 
-const loader = document.querySelector('.loader')
 
 //Fetch Pokemon API
 
+const loader = document.querySelector('.loader')
 const infoMessage = document.querySelector('.info-message')
 
 async function fetchPokemon() {
@@ -44,6 +44,7 @@ async function fetchPokemon() {
             }
             const currentPokemon = await response.json()
             creatingPokemon(currentPokemon)
+            console.log(response)
         }
         const pokemonDisplay = pokemonTab.slice(0, 30)
         creatingCard(pokemonDisplay)
