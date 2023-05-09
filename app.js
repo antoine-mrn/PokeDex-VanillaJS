@@ -33,21 +33,19 @@ const infoMessage = document.querySelector('.info-message')
 async function fetchPokemon() {
 
     try {
-        const fetches = []
-        for (let i = 1; i <= maximumPokemon; i++) {
-        fetches.push(fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`))
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=906&offset=0")
+
+        if(!response.ok) {
+            throw new Error(`${response.status} Pokemon not found`)
         }
-        const responses = await Promise.all(fetches)
-        for (const response of responses) {
-            if(!response.ok) {
-                throw new Error(`${response.status} Pokemon not found`)
-            }
-            const currentPokemon = await response.json()
-            creatingPokemon(currentPokemon)
-            console.log(response)
-        }
-        const pokemonDisplay = pokemonTab.slice(0, 30)
-        creatingCard(pokemonDisplay)
+
+        const data = await response.json()
+
+        const pokemonData = data.results
+
+        const fetchAllPokemon = pokemonData.map(pokemon => fetch(pokemon.url))
+        const responses = await Promise.all(fetchAllPokemon)
+
         loader.classList.add('hide')
         intersectionObserver.observe(document.querySelector('.intersection-observer'))
     }
