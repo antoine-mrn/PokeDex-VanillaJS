@@ -1,5 +1,7 @@
 let pokemonTab = []
 
+let numberToShow = 31
+
 const allTypes = {
     normal: "#aca596",
     fighting: "#9a563f",
@@ -50,7 +52,7 @@ async function fetchPokemon() {
             console.log(response)
         }
 
-        const pokemonDisplay = pokemonTab.slice(0, 30)
+        const pokemonDisplay = pokemonTab.slice(0, numberToShow - 1)
         creatingCard(pokemonDisplay)
         loader.classList.add('hide')
     }
@@ -64,7 +66,7 @@ async function fetchPokemon() {
 
 function creatingPokemon(pokemon) {
 
-    let pokemonObj = {}
+    const pokemonObj = {}
 
     pokemonObj.id = pokemon.id
     pokemonObj.name = pokemon.name
@@ -106,12 +108,12 @@ function cardBackground(currentCard) {
 
 // Scroll infini
 
-let index = 31
+const intersectionWatcher = document.querySelector('.intersection-observer')
 
 const handleIntersect = entries => {
     if(entries[0].isIntersecting) {
-        const pokemonToAdd = pokemonTab.slice(index, index + 20)
-        index += 20
+        const pokemonToAdd = pokemonTab.slice(numberToShow, numberToShow + 20)
+        numberToShow += 20
         creatingCard(pokemonToAdd)
     }
 }
@@ -132,7 +134,8 @@ const pokemonGeneration = {
     5: [494, 649],
     6: [650, 721],
     7: [722, 809],
-    8: [810, 905]
+    8: [810, 905],
+    9: [906, 1010]
 }
 
 const filterGeneration = document.getElementById('pokemon-generation-filter')
@@ -165,7 +168,7 @@ const form = [...document.querySelector("form")]
 function filterInit(elTarget) {
     elTarget.classList.add("target")
     cardContainer.innerHTML = ""
-    intersectionObserver.unobserve(document.querySelector('.intersection-observer'))
+    intersectionObserver.unobserve(intersectionWatcher)
 
     form.forEach(el => {
         if(!el.classList.contains("target") && el.type != "reset") {
@@ -238,12 +241,12 @@ resetBtn.addEventListener("click", resetFilter)
 function resetFilter() {
     cardContainer.innerHTML = ""
     infoMessage.textContent = ""
-    intersectionObserver.observe(document.querySelector('.intersection-observer'))
-    creatingCard(pokemonTab.slice(0, 30))
-    index = 31
+    intersectionObserver.observe(intersectionWatcher)
+    creatingCard(pokemonTab.slice(0, numberToShow - 1))
+    numberToShow = 31
 }
 
 fetchPokemon()
-.then(intersectionObserver.observe(document.querySelector('.intersection-observer')))
+.then(intersectionObserver.observe(intersectionWatcher))
 .then(addGenerationFilterOption)
 .then(addTypeFilterOption)
