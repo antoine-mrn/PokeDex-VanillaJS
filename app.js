@@ -1,6 +1,5 @@
-let pokemonTab = []
-
-let numberToShow = 31
+let pokemonArray = []
+let pokemonToShow = 31
 
 const allTypes = {
     normal: "#aca596",
@@ -49,10 +48,9 @@ async function fetchPokemon() {
             }
             const currentPokemon = await response.json()
             creatingPokemon(currentPokemon)
-            console.log(response)
         }
 
-        const pokemonDisplay = pokemonTab.slice(0, numberToShow - 1)
+        const pokemonDisplay = pokemonArray.slice(0, pokemonToShow - 1)
         creatingCard(pokemonDisplay)
         loader.classList.add('hide')
     }
@@ -73,7 +71,7 @@ function creatingPokemon(pokemon) {
     pokemonObj.sprite = pokemon["sprites"]["other"]["official-artwork"]["front_default"] != null ? pokemon["sprites"]["other"]["official-artwork"]["front_default"] : "./assets/sasha-img.webp"
     pokemonObj.types = pokemon.types.map(el => el.type.name)
 
-    pokemonTab.push(pokemonObj)
+    pokemonArray.push(pokemonObj)
 }
 
 // Création des cartes et affichage
@@ -81,7 +79,6 @@ function creatingPokemon(pokemon) {
 const cardContainer = document.querySelector('.card-container')
 
 function creatingCard(cardCreated) {
-    // console.log(cardCreated)
     for(let i = 0; i < cardCreated.length; i++) {
         const pokemonCard = document.createElement('div')
         pokemonCard.classList.add("pokemon-card")
@@ -112,8 +109,8 @@ const intersectionWatcher = document.querySelector('.intersection-observer')
 
 const handleIntersect = entries => {
     if(entries[0].isIntersecting) {
-        const pokemonToAdd = pokemonTab.slice(numberToShow, numberToShow + 20)
-        numberToShow += 20
+        const pokemonToAdd = pokemonArray.slice(pokemonToShow, pokemonToShow + 20)
+        pokemonToShow += 20
         creatingCard(pokemonToAdd)
     }
 }
@@ -188,7 +185,7 @@ function showOneGeneration(e) {
     filterInit(e.target)
     if(filterGeneration.value > 0) {
         const currentGeneration = filterGeneration.value
-        const generationFiltered = pokemonTab.slice(pokemonGeneration[currentGeneration][0] - 1, pokemonGeneration[currentGeneration][1])
+        const generationFiltered = pokemonArray.slice(pokemonGeneration[currentGeneration][0] - 1, pokemonGeneration[currentGeneration][1])
 
         creatingCard(generationFiltered)
     }
@@ -205,7 +202,7 @@ function showOneType(e) {
     filterInit(e.target)
     if(filterType.value != "") {
         const currentType = filterType.value
-        const typeFiltered = pokemonTab.filter(el => el.types.includes(currentType))
+        const typeFiltered = pokemonArray.filter(el => el.types.includes(currentType))
 
         creatingCard(typeFiltered)
     }
@@ -222,7 +219,7 @@ function searchPokemon(e) {
     filterInit(e.target)
 
     const searchInputValue = searchInput.value.toLowerCase()
-    const filteredTab = pokemonTab.filter(el => el.name.toLowerCase().includes(searchInputValue))
+    const filteredTab = pokemonArray.filter(el => el.name.toLowerCase().includes(searchInputValue))
 
     if(filteredTab.length > 0) {
         creatingCard(filteredTab)
@@ -242,8 +239,8 @@ function resetFilter() {
     cardContainer.innerHTML = ""
     infoMessage.textContent = ""
     intersectionObserver.observe(intersectionWatcher)
-    creatingCard(pokemonTab.slice(0, numberToShow - 1))
-    numberToShow = 31
+    creatingCard(pokemonArray.slice(0, pokemonToShow - 1))
+    pokemonToShow = 31
 }
 
 fetchPokemon()
