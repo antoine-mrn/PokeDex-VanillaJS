@@ -1,4 +1,3 @@
-const maximumPokemon = 906
 let pokemonTab = []
 
 const allTypes = {
@@ -31,21 +30,21 @@ const loader = document.querySelector('.loader')
 const infoMessage = document.querySelector('.info-message')
 
 async function fetchPokemon() {
-
     try {
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0")
+        const initialResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0")
 
-        if(!response.ok) {
-            throw new Error(`${response.status} Pokemon not found`)
+        if(!initialResponse.ok) {
+            throw new Error(`${initialResponse.status} Pokemon not found`)
         }
 
-        const data = await response.json()
-        const pokemonData = data.results
-
-        const fetchAllPokemon = pokemonData.map(pokemon => fetch(pokemon.url))
+        const data = await initialResponse.json()
+        const fetchAllPokemon = data.results.map(pokemon => fetch(pokemon.url))
         const responses = await Promise.all(fetchAllPokemon)
 
         for(const response of responses) {
+            if(!response.ok) {
+                throw new Error(`${response.status} Pokemon not found`)
+            }
             const currentPokemon = await response.json()
             creatingPokemon(currentPokemon)
             console.log(response)
@@ -53,9 +52,7 @@ async function fetchPokemon() {
 
         const pokemonDisplay = pokemonTab.slice(0, 30)
         creatingCard(pokemonDisplay)
-
         loader.classList.add('hide')
-        intersectionObserver.observe(document.querySelector('.intersection-observer'))
     }
     catch (error) {
         infoMessage.textContent = `${error}`
@@ -71,7 +68,7 @@ function creatingPokemon(pokemon) {
 
     pokemonObj.id = pokemon.id
     pokemonObj.name = pokemon.name
-    pokemonObj.sprite = pokemon["sprites"]["other"]["official-artwork"]["front_default"]
+    pokemonObj.sprite = pokemon["sprites"]["other"]["official-artwork"]["front_default"] != null ? pokemon["sprites"]["other"]["official-artwork"]["front_default"] : "./assets/sasha-img.webp"
     pokemonObj.types = pokemon.types.map(el => el.type.name)
 
     pokemonTab.push(pokemonObj)
@@ -247,5 +244,6 @@ function resetFilter() {
 }
 
 fetchPokemon()
+.then(intersectionObserver.observe(document.querySelector('.intersection-observer')))
 .then(addGenerationFilterOption)
 .then(addTypeFilterOption)

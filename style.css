@@ -144,6 +144,9 @@ input[type="search"] {
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.1s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .pokemon-card:hover {
@@ -152,7 +155,6 @@ input[type="search"] {
 }
 
 .pokemon-identification {
-  width: 100%;
   padding: 20px;
   font-size: 1.1em;
 }
