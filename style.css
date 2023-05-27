@@ -64,9 +64,9 @@ body {
   }
 }
 
-/* Nav */
+/* Header */
 
-nav .pokedex-logo {
+header .pokedex-logo {
   padding: 25px 0 0 25px;
   width: 300px;
 }
